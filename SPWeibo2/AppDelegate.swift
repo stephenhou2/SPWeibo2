@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        /// 程序入口
         window = UIWindow(frame: UIScreen.main.bounds)
         
+     
+        
+        
         // 设置程序入口控制器
         window?.rootViewController = rootViewController
         window?.backgroundColor = UIColor.white

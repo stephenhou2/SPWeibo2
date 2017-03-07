@@ -11,6 +11,13 @@
 		11259CFD1E6124D400F4ABFC /* SPWeibo2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11259CFC1E6124D400F4ABFC /* SPWeibo2Tests.swift */; };
 		11259D081E6124D400F4ABFC /* SPWeibo2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11259D071E6124D400F4ABFC /* SPWeibo2UITests.swift */; };
 		11259D161E61257D00F4ABFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11259D151E61257D00F4ABFC /* Assets.xcassets */; };
+		113739421E6AE16E002EE646 /* StatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113739411E6AE16E002EE646 /* StatusesView.swift */; };
+		113739441E6B046A002EE646 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113739431E6B046A002EE646 /* Status.swift */; };
+		113739461E6B0639002EE646 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113739451E6B0639002EE646 /* User.swift */; };
+		113739481E6B1446002EE646 /* StatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113739471E6B1446002EE646 /* StatusCell.swift */; };
+		1137394A1E6B2C10002EE646 /* StatusTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113739491E6B2C10002EE646 /* StatusTopView.swift */; };
+		1137394C1E6B2C26002EE646 /* StatusBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1137394B1E6B2C26002EE646 /* StatusBottomView.swift */; };
+		1137394E1E6B2C3C002EE646 /* StatusPicturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1137394D1E6B2C3C002EE646 /* StatusPicturesView.swift */; };
 		115498E91E66D84D00893353 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115498E81E66D84D00893353 /* MainViewController.swift */; };
 		115498F31E66DB0F00893353 /* NetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115498F21E66DB0F00893353 /* NetworkTool.swift */; };
 		115498F51E6702B100893353 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115498F41E6702B100893353 /* HomeTableViewController.swift */; };
@@ -60,11 +67,18 @@
 		11259D071E6124D400F4ABFC /* SPWeibo2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPWeibo2UITests.swift; sourceTree = "<group>"; };
 		11259D091E6124D400F4ABFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11259D151E61257D00F4ABFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		113739411E6AE16E002EE646 /* StatusesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusesView.swift; sourceTree = "<group>"; };
+		113739431E6B046A002EE646 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		113739451E6B0639002EE646 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		113739471E6B1446002EE646 /* StatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCell.swift; sourceTree = "<group>"; };
+		113739491E6B2C10002EE646 /* StatusTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusTopView.swift; sourceTree = "<group>"; };
+		1137394B1E6B2C26002EE646 /* StatusBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBottomView.swift; sourceTree = "<group>"; };
+		1137394D1E6B2C3C002EE646 /* StatusPicturesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusPicturesView.swift; sourceTree = "<group>"; };
 		115498E81E66D84D00893353 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../../MainViewController.swift; sourceTree = "<group>"; };
 		115498F21E66DB0F00893353 /* NetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTool.swift; sourceTree = "<group>"; };
 		115498F41E6702B100893353 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		115498F61E6702C300893353 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverTableViewController.swift; path = ../Home/DiscoverTableViewController.swift; sourceTree = "<group>"; };
-		115498F81E67033D00893353 /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
+		115498F81E67033D00893353 /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTableViewController.swift; path = View/Message/MessageTableViewController.swift; sourceTree = "<group>"; };
 		115498FA1E67034600893353 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		115498FC1E670EE300893353 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		115498FF1E671FAE00893353 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				115499161E68213A00893353 /* UserAccount.swift */,
+				113739431E6B046A002EE646 /* Status.swift */,
+				113739451E6B0639002EE646 /* User.swift */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -195,6 +211,16 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		1137394F1E6B2C46002EE646 /* StatusSubviews */ = {
+			isa = PBXGroup;
+			children = (
+				113739491E6B2C10002EE646 /* StatusTopView.swift */,
+				1137394D1E6B2C3C002EE646 /* StatusPicturesView.swift */,
+				1137394B1E6B2C26002EE646 /* StatusBottomView.swift */,
+			);
+			name = StatusSubviews;
+			sourceTree = "<group>";
+		};
 		115498E71E66D7FB00893353 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +228,7 @@
 				115498EB1E66DA2F00893353 /* Home */,
 				115498EA1E66DA2F00893353 /* Discover */,
 				115498ED1E66DA2F00893353 /* Message */,
+				115498F81E67033D00893353 /* MessageTableViewController.swift */,
 				115498EE1E66DA2F00893353 /* Profile */,
 			);
 			name = View;
@@ -219,6 +246,8 @@
 		115498EB1E66DA2F00893353 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1137394F1E6B2C46002EE646 /* StatusSubviews */,
+				113739471E6B1446002EE646 /* StatusCell.swift */,
 				115498F41E6702B100893353 /* HomeTableViewController.swift */,
 			);
 			name = Home;
@@ -239,7 +268,6 @@
 		115498ED1E66DA2F00893353 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				115498F81E67033D00893353 /* MessageTableViewController.swift */,
 			);
 			name = Message;
 			path = View/Message;
@@ -257,9 +285,10 @@
 		115498FE1E671F8500893353 /* Visitor */ = {
 			isa = PBXGroup;
 			children = (
+				115499031E67AC6300893353 /* OAuthViewController.swift */,
 				115499181E68394100893353 /* VisitorView.swift */,
 				115498FF1E671FAE00893353 /* UserViewController.swift */,
-				115499031E67AC6300893353 /* OAuthViewController.swift */,
+				113739411E6AE16E002EE646 /* StatusesView.swift */,
 			);
 			name = Visitor;
 			sourceTree = "<group>";
@@ -382,6 +411,7 @@
 				TargetAttributes = {
 					11259CE31E6124D400F4ABFC = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = J52YX98N63;
 						ProvisioningStyle = Automatic;
 					};
 					11259CF71E6124D400F4ABFC = {
@@ -586,21 +616,28 @@
 			files = (
 				115498FB1E67034600893353 /* ProfileTableViewController.swift in Sources */,
 				115499131E681F7200893353 /* WelcomeViewController.swift in Sources */,
+				113739421E6AE16E002EE646 /* StatusesView.swift in Sources */,
 				115498F51E6702B100893353 /* HomeTableViewController.swift in Sources */,
 				115499101E67F76A00893353 /* NewFeatureCell.swift in Sources */,
+				113739461E6B0639002EE646 /* User.swift in Sources */,
 				115499191E68394100893353 /* VisitorView.swift in Sources */,
 				115499091E67E07400893353 /* Common.swift in Sources */,
 				115499021E67235D00893353 /* UILabel+Extension.swift in Sources */,
 				11259CE81E6124D400F4ABFC /* AppDelegate.swift in Sources */,
 				115498F31E66DB0F00893353 /* NetworkTool.swift in Sources */,
+				113739481E6B1446002EE646 /* StatusCell.swift in Sources */,
+				1137394A1E6B2C10002EE646 /* StatusTopView.swift in Sources */,
 				115499171E68213A00893353 /* UserAccount.swift in Sources */,
+				1137394E1E6B2C3C002EE646 /* StatusPicturesView.swift in Sources */,
 				1154990E1E67F6F700893353 /* NewFeatureViewController.swift in Sources */,
 				115498F71E6702C300893353 /* DiscoverTableViewController.swift in Sources */,
 				115498FD1E670EE300893353 /* UIButton+Extension.swift in Sources */,
 				115498F91E67033D00893353 /* MessageTableViewController.swift in Sources */,
 				115498E91E66D84D00893353 /* MainViewController.swift in Sources */,
 				115499001E671FAE00893353 /* UserViewController.swift in Sources */,
+				113739441E6B046A002EE646 /* Status.swift in Sources */,
 				115499041E67AC6300893353 /* OAuthViewController.swift in Sources */,
+				1137394C1E6B2C26002EE646 /* StatusBottomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,7 +713,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -720,7 +757,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -736,6 +773,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = J52YX98N63;
 				INFOPLIST_FILE = SPWeibo2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -753,6 +791,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = J52YX98N63;
 				INFOPLIST_FILE = SPWeibo2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

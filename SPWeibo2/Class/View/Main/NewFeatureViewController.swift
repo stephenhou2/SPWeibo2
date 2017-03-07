@@ -54,6 +54,7 @@ class NewFeatureViewController: UICollectionViewController {
     
     deinit {
         print("新特性析构")
+        removeFromParentViewController()
     }
     
     // MARK: UICollectionViewDataSource

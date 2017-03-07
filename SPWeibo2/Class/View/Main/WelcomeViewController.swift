@@ -53,6 +53,11 @@ class WelcomeViewController: UIViewController {
     }
     
     
+    deinit {
+        print("欢迎界面析构")
+        removeFromParentViewController()
+    }
+    
 }
 
 // MARK: -自定义的一些方法

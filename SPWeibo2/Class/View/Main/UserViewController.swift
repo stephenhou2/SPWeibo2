@@ -13,48 +13,56 @@ import WebKit
 
 class UserViewController: UITableViewController,VisitorViewDelegate {
 
-    // visitorView对象
     var visitor:VisitorView?
-   
+    // 获取单例的用户信息对象（本地加载）
+    private lazy var account = UserAccount.sharedAccount ?? UserAccount.loadUserInfo()
+    // 认证控制器
+    fileprivate lazy var oAuthVC:OAuthViewController = OAuthViewController()
+    
+    private lazy var destinationView:UIView = {
+        // 判断进入游客模式还是已注册用户模式
+        guard self.account != nil else{
+            self.visitor = VisitorView()
+            self.visitor!.delegate = self
+            return self.visitor!
+        }
+        return UITableView()
+    }()
+    
     override func loadView() {
         super.loadView()
-        // 获取单例的用户信息对象（本地加载）
-      let account = UserAccount.sharedAccount ?? UserAccount.loadUserInfo()
+        view = destinationView
         
-        // 判断进入游客模式还是已注册用户模式
-        guard account != nil else{
-            visitor = VisitorView()
-            visitor?.delegate = self
-            self.view = visitor
-            return
-        }
-        self.view = UITableView()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-    
-    deinit {
-        print("用户界面析构")
+        if account == nil{
+            
+        }
     }
       
 }
+
+
+
+
+
+
 
 // MARK: - 代理方法
 extension UserViewController{
     
     // 登录按钮点击响应方法
     internal func visitorViewLoginButtonClicked() {
-        let nav = UINavigationController(rootViewController: OAuthViewController())
+        let nav = UINavigationController(rootViewController: oAuthVC)
         show(nav, sender: self)
     }
     
     // 注册按钮点击响应方法
     internal func visitorViewRegisterButtonClicked() {
-        print("register")
+      //--------zhcue
     }
     
 }

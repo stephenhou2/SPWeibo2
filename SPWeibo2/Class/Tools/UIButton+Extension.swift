@@ -11,7 +11,7 @@ import UIKit
 extension UIButton{
     
     /// 便利构造函数
-    convenience init(title:String?,imageName:String?,backgroundImageName:String?,titleColor:UIColor = UIColor.darkGray){
+    convenience init(title:String?,imageName:String?,backgroundImageName:String?,titleColor:UIColor = UIColor.darkGray,fontSize:CGFloat = 14){
         self.init()
         if title != nil{
             setTitle(title, for: .normal)
@@ -24,7 +24,7 @@ extension UIButton{
         }
         
         setTitleColor(titleColor, for: .normal)
-        
+        titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
         sizeToFit()
     }
 }

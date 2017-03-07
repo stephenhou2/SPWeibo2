@@ -51,6 +51,8 @@ class MainViewController:UITabBarController {
     
     deinit {
         print("主界面析构")
+        removeFromParentViewController()
+        
     }
     
 }
@@ -59,7 +61,7 @@ class MainViewController:UITabBarController {
 extension MainViewController{
     // composeButton点击响应
     @objc fileprivate func composeButtonClicked(){
-        print("clicked")
+ 
     }
 }
 

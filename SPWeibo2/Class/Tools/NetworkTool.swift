@@ -32,7 +32,12 @@ class NetworkTool: AFHTTPSessionManager {
         return manager
     }()
     
-
+    // 用户数据
+    fileprivate lazy var userAccount = UserAccount.sharedAccount
+    
+    fileprivate lazy var statusUrl = "https://api.weibo.com/2/statuses/home_timeline.json"
+    
+    
     /// 封装AFNetworking的HTTPSessionManager下的一些网络方法，适合小数据量网络请求使用
     func request(method:SPRequestMethod,URLString:String,parameters:Any?,completion:@escaping (Any?,Error?)->()){
         switch method {
@@ -116,5 +121,33 @@ class NetworkTool: AFHTTPSessionManager {
         
         
     }
+    
+}
+
+
+// MARK: -微博的网络方法
+extension NetworkTool{
+    
+    func loadStatues(finished:@escaping ([Any]?)->()){
+        
+        let accessToken = userAccount?.access_token
+        let parameters:[String:AnyObject] = ["access_token":accessToken as AnyObject, // 用户登录口令
+            "count":50 as AnyObject,]// 每次请求返回的微博数
+        
+        
+        NetworkTool.sharedManager.request(method: .GET, URLString: statusUrl, parameters: parameters) { (responseObject, error) in
+            if (error != nil) {
+                print(error!)
+                return
+            }
+            if let response = responseObject as? [String:AnyObject]{
+                finished(response["statuses"] as? [Any])
+            }
+        }
+    }
+    
+    
+    
+    
     
 }

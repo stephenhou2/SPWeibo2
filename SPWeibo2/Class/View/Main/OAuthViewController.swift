@@ -75,6 +75,7 @@ class OAuthViewController: UIViewController {
     
     deinit {
         print("第三方登录页面析构")
+        removeFromParentViewController()
     }
 
 }
@@ -119,6 +120,7 @@ extension OAuthViewController:WKNavigationDelegate{
                           "grant_type":"authorization_code",
                           "code":code,
                           "redirect_uri":redirectUri]
+
         
         // 发送网络请求获取登录令牌
         NetworkTool.sharedManager.request(method: .POST, URLString: tokenURLString, parameters: parameters, completion: { (response, error) in
