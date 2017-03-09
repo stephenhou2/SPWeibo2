@@ -1,5 +1,5 @@
 //
-//  NormakStatusCell.swift
+//  RefreshControlView.swift
 //  SPWeibo2
 //
 //  Created by 侯亮宏 on 17/3/9.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NormakStatusCell: StatusCell {
+class RefreshControlView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
