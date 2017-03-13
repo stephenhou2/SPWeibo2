@@ -30,6 +30,9 @@ class StatusBottomView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+
+    
 }
 
 // MARK:-初始化控件和布局
@@ -44,26 +47,28 @@ extension StatusBottomView{
         addSubview(likeButton)
         
         // 设置约束
+        
+        let buttonWidth = screenWidth / 3
+        let buttonHeight:CGFloat = 44
+        
+        
         repostButton.snp.makeConstraints { (make) in
             make.top.equalTo(self.snp.top)
             make.left.equalTo(self.snp.left)
-            make.bottom.equalTo(self.snp.bottom)
+            make.size.equalTo(CGSize(width: buttonWidth, height: buttonHeight))
         }
-        
         commentButton.snp.makeConstraints { (make) in
-            make.top.equalTo(repostButton.snp.top)
+            make.centerY.equalTo(repostButton.snp.centerY)
             make.left.equalTo(repostButton.snp.right)
-            make.bottom.equalTo(repostButton.snp.bottom)
-            make.width.equalTo(repostButton.snp.width)
+            make.size.equalTo(CGSize(width: buttonWidth, height: buttonHeight))
+            
+        }
+        likeButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(commentButton.snp.centerY)
+            make.left.equalTo(commentButton.snp.right)
+            make.size.equalTo(CGSize(width: buttonWidth, height: buttonHeight))
         }
         
-        likeButton.snp.makeConstraints { (make) in
-            make.top.equalTo(commentButton.snp.top)
-            make.left.equalTo(commentButton.snp.right)
-            make.right.equalTo(self.snp.right)
-            make.bottom.equalTo(commentButton.snp.bottom)
-            make.width.equalTo(commentButton.snp.width)
-        }
         
         // 添加按钮之间的分隔线
         let seperatorLine1 = seperatorLine
@@ -87,7 +92,9 @@ extension StatusBottomView{
             make.width.equalTo(seperatorLineWidth)
             make.height.equalTo(commentButton.snp.height).multipliedBy(seperatorLineScale)
         }
-
+        
+        layer.isOpaque = true
+        
     }
     
     fileprivate var seperatorLine:UIView{
@@ -95,5 +102,4 @@ extension StatusBottomView{
         sep.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
         return sep
     }
-    
 }

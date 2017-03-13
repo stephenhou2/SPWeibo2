@@ -74,6 +74,7 @@ extension VisitorView{
         animation.isRemovedOnCompletion = false
         
         backgroudImageView?.layer.add(animation, forKey: "transform.rotation")
+
     }
 
     

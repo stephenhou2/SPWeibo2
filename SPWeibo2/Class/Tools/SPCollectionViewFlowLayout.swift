@@ -9,5 +9,19 @@
 import UIKit
 
 class SPCollectionViewFlowLayout: UICollectionViewFlowLayout {
+    
+    
+    init(minimumLineSpacing:CGFloat? = 8,minimumInteritemSpacing:CGFloat? = 8) {
+        super.init()
 
+        self.minimumLineSpacing = minimumLineSpacing!
+        self.minimumInteritemSpacing = minimumInteritemSpacing!
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
 }

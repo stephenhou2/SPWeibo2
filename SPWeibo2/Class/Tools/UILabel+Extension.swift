@@ -18,13 +18,13 @@ extension UILabel{
         self.textColor = textColor
         self.textAlignment = NSTextAlignment.center
         self.numberOfLines = 0
+        self.layer.isOpaque = true
     }
     
     convenience init(text:String,fontSize:Int,textColor:UIColor, margin:CGFloat){
         self.init(text:text,fontSize:fontSize,textColor:textColor)
         self.preferredMaxLayoutWidth = screenWidth - 2 * margin
         self.textAlignment = NSTextAlignment.left
-        
     }
 
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NormakStatusCell: StatusCell {
+class NormalStatusCell: StatusCell {
 
     override func setupUI() {
         super.setupUI()

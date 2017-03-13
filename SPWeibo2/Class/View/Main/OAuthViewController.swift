@@ -16,9 +16,9 @@ class OAuthViewController: UIViewController {
     // oAuthView
     fileprivate lazy var oAuthView = WKWebView(frame: UIScreen.main.bounds)
     // appKey
-    fileprivate lazy var appKey = "2708932631"
+    fileprivate lazy var appKey = "2738184032"
     // appSecret
-    fileprivate lazy var appSecret = "e7b57f5ffdd45f8af14d92d9de5e9bc3"
+    fileprivate lazy var appSecret = "15095726e1dac37ec5fa4eb9889362e4"
     // redirectUri
     fileprivate lazy var redirectUri = "https://www.baidu.com"
     // 用户信息对象
@@ -61,7 +61,7 @@ class OAuthViewController: UIViewController {
     
     // 自动填充按钮点击响应方法
     @objc private func autofillInfo(){
-        let jsString = "document.getElementById('userId').value='18019019585';" +
+        let jsString = "document.getElementById('userId').value='stephenhou2@163.com';" +
         "document.getElementById('passwd').value='199123';"
         oAuthView.evaluateJavaScript(jsString, completionHandler: nil)
         

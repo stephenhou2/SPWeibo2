@@ -8,22 +8,15 @@
 
 import UIKit
 
-class ArrayDynamicRowHeightTool: ArrayTableViewTool {
+class ArrayDynamicTableViewTool: ArrayTableViewTool {
     
-    // 行高
-    var rowHeights:[CGFloat]?
+
     
-    // 如果异步获取数据需要在去的数据后刷新dataArray 和 rowHeights
-    
-    func updateData(dataArray:[AnyObject]?,rowHeights:[CGFloat]?,configureCellBlock:((AnyObject,AnyObject)->())?){
-        super.updateData(dataArray: dataArray, configureCellBlock: configureCellBlock)
-        self.rowHeights = rowHeights
-    }
     
     // 确定动态行高
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       
-        return  rowHeights == nil ? 0 : rowHeights![indexPath.row]
+        return cellInfo == nil ? 0 : cellInfo!.cellHeights[indexPath.row]
    
     }
     

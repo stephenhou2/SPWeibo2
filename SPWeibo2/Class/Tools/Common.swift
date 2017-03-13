@@ -29,3 +29,8 @@ enum WBSwitchRootVCNotificationSender{
 
 // 切换根控制器的通知名
 let WBSwitchRootViewControllerNotification = Notification.Name("WBSwitchRootViewController")
+
+// 首页底部上拉刷新通知名
+let WBHomeLoadEarlierStatusesNofification = Notification.Name(rawValue: "WBHomeLoadEarlierStatuses")
+
+let navigationBarHeight:CGFloat = 64

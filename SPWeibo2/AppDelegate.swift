@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private lazy var userHasLogged:Bool? = UserDefaults.standard.value(forKey: "hasLogged") as? Bool
     private var rootViewController:UIViewController? {
+  
         let account = UserAccount.sharedAccount
         guard account != nil else { print("读取失败")
             if userHasLogged != nil {
@@ -23,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return NewFeatureViewController()
         }
         return WelcomeViewController()
+
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -66,11 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-// MARK: -自定义的一些方法
-extension AppDelegate{
-
-}
-
 
 extension AppDelegate{
     
@@ -83,6 +80,6 @@ extension AppDelegate{
         UINavigationBar.appearance().tintColor = UIColor.orange
 //        UINavigationBar.appearance().titleTextAttributes
     }
-
+    
     
 }

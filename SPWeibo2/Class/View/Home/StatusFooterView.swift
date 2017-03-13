@@ -8,14 +8,26 @@
 
 import UIKit
 
-class StatusFooterView: UIView {
+class StatusFooterView: UITableViewHeaderFooterView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        setupUI()
     }
-    */
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    private func setupUI(){
+        let textLabel = UILabel(text: "上拉显示更多")
+        addSubview(textLabel)
+        
+        textLabel.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(self.snp.centerX)
+            make.centerY.equalTo(self.snp.centerY)
+        })
+    }
 }

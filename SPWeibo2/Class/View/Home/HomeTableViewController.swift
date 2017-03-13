@@ -8,28 +8,42 @@
 
 import UIKit
 
-let statusReuseIdentifier = "Status"
-
 
 class HomeTableViewController: UserViewController {
 
-    
-    // 用户首页最新微博
+    let normalStatusReuseIdentifier = "normalStatusIdentifier"
+    let retweetedStatusReuseIdentifier = "retweetedStatusReuseIdentifier"
+    let headerFooterViewReuseIdentifier = "headerFooterViewReuseIdentifier"
+    /// 用户首页最新微博
     fileprivate var statuses:[Status] = [Status]()
-    
-    fileprivate lazy var statuesCellHeights:[CGFloat] = {
-       
-        var statuesCellHeights = [CGFloat]()
-        for i in 0..<self.statuses.count{
-            let statusCell = StatusCell(style: .default, reuseIdentifier: statusReuseIdentifier)
-            statusCell.status = self.statuses[i]
-//            let cellHeight = statusCell.rowHeight(vm: self.statuses[i])
-            let cellHeight = statusCell.rowHeight
-            statuesCellHeights.append(cellHeight)
+    fileprivate var loadNew:Bool = true
+    /// 微博的id
+    fileprivate var since_id:Int{
+        return loadNew ? (statuses.first?.id ?? 0) : 0
+    }
+    fileprivate var max_id:Int{
+        guard !loadNew else{
+            return 0
         }
-        return statuesCellHeights
-        
-    }()
+        guard statuses.last?.id != nil else{
+            return 0
+        }
+        return  (statuses.last?.id)! - 1
+    }
+    
+    private lazy var footerView:UIView = StatusFooterView(reuseIdentifier: self.headerFooterViewReuseIdentifier)
+    
+    /// 行高数组
+    fileprivate var statusCellInfo:CellInfo{
+        return checkCellInfo()
+    }
+
+    
+    
+    /// tableView管类类工具
+    fileprivate var dataSourceAndDelegateTool:ArrayDynamicTableViewTool?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,81 +55,161 @@ class HomeTableViewController: UserViewController {
             return
         }
         
-        tableView.estimatedRowHeight = 200
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
+        // 进入用户界面
+        /// 设置界面风格
+        setupStyle()
         
-        // 如果进入用户界面，加载用户首页微博信息
-       
-        // 注册显示的cell
-        tableView.register(StatusCell.self, forCellReuseIdentifier: statusReuseIdentifier)
+        //初始化tableView管理工具
+        dataSourceAndDelegateTool = ArrayDynamicTableViewTool(tableView: self.tableView,
+                                                              rowHeight:nil,
+                                                              cellRegisterInfo: [normalStatusReuseIdentifier:NormalStatusCell.self,
+                                                                            retweetedStatusReuseIdentifier:RetweetedStatusCell.self],
+                                                              headerFooterViewReuseIdentifier:headerFooterViewReuseIdentifier,
+                                                              registerHeaderFooterViewClass:StatusFooterView.self)
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        /// 加载用户首页微博信息
+        loadNewStatuses()
         
-        tableView.separatorStyle = .none
+        NotificationCenter.default.addObserver(forName: WBHomeLoadEarlierStatusesNofification, object: tableView.delegate, queue: nil) {[weak self](notification) in
+            self?.loadEarlierStatues()
+            
+            
         
-        loadStatues()
-        
-        
-        
+            
+        }
+  
     }
-
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
    
 }
 
 // MARK: - 自定义方法
 extension HomeTableViewController{
     
-    fileprivate func loadStatues(){
-        NetworkTool.sharedManager.loadStatues { (responseObject) in
-            guard responseObject != nil else{
-                print("数据获取失败")
-                return
-            }
-            let statuses = responseObject as! [[String:AnyObject]]
-            for statusDic in statuses{
-                let status = Status(dic:statusDic)
-                self.statuses.append(status)
-            }
-            self.tableView.reloadData()
+    @objc fileprivate func loadStatues(completion:(()->())?){
+        
+        /// 获取网络数据方法
+        NetworkTool.sharedManager.loadStatues(since_id:since_id, max_id:max_id) { (responseObject) in
+
+            
+            DispatchQueue.global().async(execute: { 
+                var items = [Status]()
+                for item in responseObject{
+                    let status = Status(dic: item as! [String:AnyObject])
+                    items.append(status)
+                }
+                if self.loadNew{
+                    self.statuses = items + self.statuses
+                }
+                else{
+                    self.statuses = self.statuses + items
+                }
+                /// 加载网络数据
+                self.dataSourceAndDelegateTool?.updateData(dataArray: self.statuses,cellInfo:self.statusCellInfo){
+                    (cell, item) in
+                    let statusCell = cell as! StatusCell
+                    let status = item as! Status
+                    statusCell.status = status
+                    
+                }
+                // 重新显示数据
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                    if completion != nil {
+                        completion!()
+                    }
+                })
+            })
+            
         }
         
     }
+    /// 设置界面风格
+    fileprivate func setupStyle(){
+        
+        tableView.estimatedRowHeight = 600
+        tableView.separatorStyle = .none
+        tableView.layer.isOpaque = true
+        
+        
+        if #available(iOS 10.0, *) {
+            refreshControl = RefreshControlView(refreshBlock: loadNewStatuses)
+            refreshControl?.isEnabled = true
+
+        } else {
+            // Fallback on earlier versions
+            print("不支持refreshcontrol")
+        }
+   
+    }
+    
+    
+    /// cell信息
+    fileprivate func checkCellInfo()->CellInfo{
+        
+        var statusCellHeights = [CGFloat]()
+        var statusCellReuseIds = [String]()
+        for i in 0..<self.statuses.count{
+            let status = self.statuses[i]
+            let statusCell:StatusCell
+            let statusCellReuseId:String
+            if status.retweeted_status != nil{
+                statusCell = RetweetedStatusCell(style: .default, reuseIdentifier: retweetedStatusReuseIdentifier)
+                statusCellReuseId = retweetedStatusReuseIdentifier
+            }
+            else {
+                statusCell = NormalStatusCell(style:.default, reuseIdentifier: normalStatusReuseIdentifier)
+                statusCellReuseId = normalStatusReuseIdentifier
+            }
+            statusCell.status = status
+            let rowHeight = statusCell.rowHeight
+            statusCellHeights.append(rowHeight)
+            statusCellReuseIds.append(statusCellReuseId)
+        }
+        return CellInfo(cellHeights: statusCellHeights, cellReuseIds: statusCellReuseIds)
+
+    }
+    
+    
+    
+    // 加载新微博
+    func loadNewStatuses(){
+        
+        if since_id == 0 && max_id == 0{
+            
+            loadStatues(completion: nil)
+        }
+        else{
+            loadNew = true
+            loadStatues {
+            // 停止刷新菊花的动作
+            self.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
+    // 加载老微博
+    func loadEarlierStatues(){
+        loadNew = false
+        if max_id != 0{
+            loadNew = false
+            loadStatues(completion: nil)
+        }
+    }
+
+}
+
+/// MARK: - 代理方法
+extension ArrayTableViewTool{
+
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        NotificationCenter.default.post(name: WBHomeLoadEarlierStatusesNofification, object: self)
+    }
+ 
 }
 
 
-// MARK: -数据源方法
-extension HomeTableViewController{
-    
-    
-    //／ 行数
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statuses.count
-    }
-    
-    /// cell初始化
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // 创建cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: statusReuseIdentifier, for: indexPath) as? StatusCell
-        
-        // 这里不要进行数据绑定
-//        cell?.status = statuses[indexPath.row]
-        
-        return cell!
-
-    }
-//    /// 这里进行数据绑定
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // 获取即将显示的cell
-        let statusCell = cell as! StatusCell
-        // 给cell绑定数据
-        statusCell.status = statuses[indexPath.row]
-
-        
-    }
-    // 计算行高
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return statuesCellHeights[indexPath.row]
-    }
-
-}

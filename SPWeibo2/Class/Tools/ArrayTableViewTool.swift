@@ -12,21 +12,67 @@ class ArrayTableViewTool: NSObject,UITableViewDataSource,UITableViewDelegate {
     
     
     
-    
+    // 数据源
     private var dataArray:[AnyObject]?
-    private var reuseIdentifier:String?
-    private var configureCellBlock:(AnyObject,AnyObject)->()
+    // cell可重用标示
+    private var cellReuseIdentifiers:[String]?
+    // 完成回调
+    private var configureCellBlock:((AnyObject,AnyObject)->())?
     
-    // 初始化方法
-    init(dataArray:[AnyObject],reuseIdentifier:String,configereCellBlock:@escaping (AnyObject,AnyObject)->()){
-        self.dataArray = dataArray
-        self.reuseIdentifier = reuseIdentifier
-        self.configureCellBlock = configereCellBlock
+    // headerFooterView可重用标识
+    private var headerFooterViewReuseIdentifier:String?
+
+    var cellInfo:CellInfo?
+
+    /// 判断是否是向下滑动
+    var crossDownwards = true
+    
+    
+    // 构造方法
+    init(tableView:UITableView,rowHeight:CGFloat?,
+         cellRegisterInfo:[String:AnyClass],
+         headerFooterViewReuseIdentifier:String?,
+         registerHeaderFooterViewClass:AnyClass?){
         super.init()
+        
+        // 设置代理，注册cell
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // 注册headerFooterView
+        if let registerHeaderFooterViewClass = registerHeaderFooterViewClass,headerFooterViewReuseIdentifier != nil{
+            tableView.register(registerHeaderFooterViewClass, forHeaderFooterViewReuseIdentifier: headerFooterViewReuseIdentifier!)
+            self.headerFooterViewReuseIdentifier = headerFooterViewReuseIdentifier!
+            
+        }
+        
+        // 注册cell
+        for key in cellRegisterInfo.keys{
+            tableView.register(cellRegisterInfo[key], forCellReuseIdentifier: key)
+        }
+
+        
+        // 设置默认行高
+        if rowHeight != nil{
+            tableView.rowHeight = rowHeight!
+        }
+        
+        
+    }
+    convenience init(tableView:UITableView,cellRegisterInfo:[String:AnyClass]){
+        self.init(tableView:tableView,
+                  rowHeight:nil,
+                  cellRegisterInfo:cellRegisterInfo,
+                  headerFooterViewReuseIdentifier:nil,
+                  registerHeaderFooterViewClass:nil)
     }
     
-    convenience init(dataArray:[AnyObject],reuseIdentifier:String,configereCellBlock:@escaping (AnyObject,AnyObject)->(),rowHeight:CGFloat){
-        
+    // 更新数据，完成回调
+    func updateData(dataArray:[AnyObject]?,cellInfo:CellInfo,configureCellBlock:((AnyObject,AnyObject)->())?){
+
+        self.dataArray = dataArray
+        self.configureCellBlock = configureCellBlock
+        self.cellInfo = cellInfo
     }
     
     // 确定行数
@@ -35,15 +81,35 @@ class ArrayTableViewTool: NSObject,UITableViewDataSource,UITableViewDelegate {
     }
     // 创建cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier!, for: indexPath)
+        
+   
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellInfo!.cellReuseIds[indexPath.row], for: indexPath)
         return cell
         
     }
-    // 绑定数据
+    // 绑定cell数据
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
+
         let item = dataArray![indexPath.row]
-         configureCellBlock(cell!,item)
+        if let configureCellBlock = self.configureCellBlock{
+            configureCellBlock(cell,item)
+        }
     }
     
+    
+    
+    // 创建headerFooterView
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerFooterViewReuseIdentifier!)
+        return footerView
+    }
+    // 设置顶部高度
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    // 设置底部高度
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 44
+    }
+
 }

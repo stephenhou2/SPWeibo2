@@ -19,17 +19,19 @@ class User:NSObject{
     var verified_type:Int = -1
     
     
+    // 初始化方法
     init(dic:[String:AnyObject]){
         super.init()
         setValuesForKeys(dic)
     }
     
+    // 未定义key不要抛出异常
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
-    
+
+    // description
     override var description: String{
         return dictionaryWithValues(forKeys: ["screen_name","profile_image_url","verified_type"]).description
     }
-    
-    
+
 }

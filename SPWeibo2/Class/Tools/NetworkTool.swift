@@ -128,26 +128,32 @@ class NetworkTool: AFHTTPSessionManager {
 // MARK: -微博的网络方法
 extension NetworkTool{
     
-    func loadStatues(finished:@escaping ([Any]?)->()){
+    func loadStatues(since_id:Int,max_id:Int,finished:@escaping ([Any])->()){
         
         let accessToken = userAccount?.access_token
         let parameters:[String:AnyObject] = ["access_token":accessToken as AnyObject, // 用户登录口令
-            "count":50 as AnyObject,]// 每次请求返回的微博数
-        
+                                            "count":20 as AnyObject, // 每次请求返回的微博数
+                                            "since_id":since_id as AnyObject, // 若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
+                                            "max_id":max_id as AnyObject] // 若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
         
         NetworkTool.sharedManager.request(method: .GET, URLString: statusUrl, parameters: parameters) { (responseObject, error) in
+            
             if (error != nil) {
-                print(error!)
+                print("网络错误:\(error!)")
                 return
             }
-            if let response = responseObject as? [String:AnyObject]{
-                finished(response["statuses"] as? [Any])
+           
+            guard let response = responseObject as? [String:AnyObject] else{
+                print("返回数据格式错误,一级不是字典:\(responseObject)")
+                return
             }
+            guard let statuses = response["statuses"] as? [Any] else{
+                print("返回数据格式错误，二级不是数组\(response)")
+                return
+            }
+            finished(statuses)
         }
     }
-    
-    
-    
     
     
 }

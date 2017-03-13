@@ -26,7 +26,7 @@ class UserViewController: UITableViewController,VisitorViewDelegate {
             self.visitor!.delegate = self
             return self.visitor!
         }
-        return UITableView()
+        return UITableView(frame:screenRect,style:UITableViewStyle.grouped)
     }()
     
     override func loadView() {
