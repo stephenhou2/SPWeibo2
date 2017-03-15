@@ -11,7 +11,7 @@ import UIKit
 extension UILabel{
     
     
-    convenience init(text:String,fontSize:Int = 14,textColor:UIColor = UIColor.darkGray){
+    convenience init(text:String,fontSize:Int = 17,textColor:UIColor = UIColor.darkGray){
         self.init()
         self.text = text
         self.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
@@ -19,12 +19,14 @@ extension UILabel{
         self.textAlignment = NSTextAlignment.center
         self.numberOfLines = 0
         self.layer.isOpaque = true
+        sizeToFit()
     }
     
     convenience init(text:String,fontSize:Int,textColor:UIColor, margin:CGFloat){
         self.init(text:text,fontSize:fontSize,textColor:textColor)
         self.preferredMaxLayoutWidth = screenWidth - 2 * margin
         self.textAlignment = NSTextAlignment.left
+        sizeToFit()
     }
 
     

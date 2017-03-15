@@ -52,25 +52,30 @@ extension StatusBottomView{
         let buttonHeight:CGFloat = 44
         
         
-        repostButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.snp.top)
-            make.left.equalTo(self.snp.left)
-            make.size.equalTo(CGSize(width: buttonWidth, height: buttonHeight))
-        }
-        commentButton.snp.makeConstraints { (make) in
-            make.centerY.equalTo(repostButton.snp.centerY)
-            make.left.equalTo(repostButton.snp.right)
-            make.size.equalTo(CGSize(width: buttonWidth, height: buttonHeight))
-            
-        }
-        likeButton.snp.makeConstraints { (make) in
-            make.centerY.equalTo(commentButton.snp.centerY)
-            make.left.equalTo(commentButton.snp.right)
-            make.size.equalTo(CGSize(width: buttonWidth, height: buttonHeight))
-        }
+        repostButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
+        commentButton.frame = CGRect(x: buttonWidth, y: 0, width: buttonWidth, height: buttonHeight)
+        likeButton.frame = CGRect(x: 2 * buttonWidth, y: 0, width: buttonWidth, height: buttonHeight)
         
         
-        // 添加按钮之间的分隔线
+//        repostButton.snp.makeConstraints { (make) in
+//            make.top.equalTo(self.snp.top)
+//            make.left.equalTo(self.snp.left)
+//            make.size.equalTo(CGSize(width: buttonWidth, height: buttonHeight))
+//        }
+//        commentButton.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(repostButton.snp.centerY)
+//            make.left.equalTo(repostButton.snp.right)
+//            make.size.equalTo(CGSize(width: buttonWidth, height: buttonHeight))
+//            
+//        }
+//        likeButton.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(commentButton.snp.centerY)
+//            make.left.equalTo(commentButton.snp.right)
+//            make.size.equalTo(CGSize(width: buttonWidth, height: buttonHeight))
+//        }
+        
+        
+//        // 添加按钮之间的分隔线
         let seperatorLine1 = seperatorLine
         let seperatorLine2 = seperatorLine
         addSubview(seperatorLine1)
@@ -78,8 +83,8 @@ extension StatusBottomView{
         
         let seperatorLineWidth = 1
         let seperatorLineScale = 0.4
-        
-        // 设置分割线的约束
+
+//        // 设置分割线的约束
         seperatorLine1.snp.makeConstraints { (make) in
             make.left.equalTo(repostButton.snp.right)
             make.centerY.equalTo(repostButton.snp.centerY)

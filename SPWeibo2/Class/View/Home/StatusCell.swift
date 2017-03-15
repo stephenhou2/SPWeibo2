@@ -17,7 +17,7 @@ class StatusCell: UITableViewCell {
     // cell顶部视图
     lazy var topView:StatusTopView = StatusTopView()
     // cell中间文本视图
-    lazy var textView:UILabel = UILabel(text: "正文", fontSize: 12, textColor: UIColor.darkGray, margin: statusMargin)
+    lazy var textView:UILabel = UILabel(text: "正文", fontSize: 15, textColor: UIColor.darkGray, margin: statusMargin)
 
     // cell图片视图
     lazy var picturesView:StatusPicturesCollectionView = StatusPicturesCollectionView()
@@ -26,11 +26,13 @@ class StatusCell: UITableViewCell {
     // status模型
     var status:Status?{
         didSet{
-
-                topView.userIconView.sd_setImage(with: URL(string:self.status?.user?.profile_image_url ?? ""), placeholderImage: UIImage(named: ""))
-                self.topView.userNameLabel.text = self.status?.user?.screen_name
-                self.textView.text  = self.status?.text
-                picturesView.picArray = status?.picArray
+//                DispatchQueue.global().async { 
+                    self.topView.userIconView.sd_setImage(with: URL(string:self.status?.user?.profile_image_url ?? ""), placeholderImage: UIImage(named: ""))
+                    self.topView.userNameLabel.text = self.status?.user?.screen_name
+                    self.textView.text = self.status?.text
+                    self.picturesView.picArray = self.status?.picArray
+//                }
+            
                 picturesView.snp.updateConstraints { (make) in
                     make.size.equalTo(picturesView.bounds.size)
 

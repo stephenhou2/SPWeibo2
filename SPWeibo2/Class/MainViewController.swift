@@ -61,7 +61,9 @@ class MainViewController:UITabBarController {
 extension MainViewController{
     // composeButton点击响应
     @objc fileprivate func composeButtonClicked(){
- 
+        // 点击发布按钮时modal出发布控制器
+        let nav = UINavigationController(rootViewController: ComposeViewController())
+        show(nav, sender: self)
     }
 }
 

@@ -131,10 +131,13 @@ extension HomeTableViewController{
     /// 设置界面风格
     fileprivate func setupStyle(){
         
-        tableView.estimatedRowHeight = 600
+//        tableView.estimatedRowHeight = 600
         tableView.separatorStyle = .none
         tableView.layer.isOpaque = true
         
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.isOpaque = true
         
         if #available(iOS 10.0, *) {
             refreshControl = RefreshControlView(refreshBlock: loadNewStatuses)

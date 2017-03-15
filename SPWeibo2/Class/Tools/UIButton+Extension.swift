@@ -18,6 +18,7 @@ extension UIButton{
         }
         if imageName != nil {
             setImage(UIImage(named:imageName!), for: .normal)
+            setImage(UIImage(named: imageName! + "_highlighted"), for: .highlighted)
         }
         if backgroundImageName != nil{
             setBackgroundImage(UIImage(named:backgroundImageName!), for: .normal)
@@ -27,4 +28,12 @@ extension UIButton{
         titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
         sizeToFit()
     }
+    
+    convenience init(title:String?,imageName:String?,backgroundImageName:String?,setSelectedImage:Bool,titleColor:UIColor = UIColor.darkGray,fontSize:CGFloat = 14){
+        self.init(title:title,imageName:imageName,backgroundImageName:backgroundImageName)
+        if setSelectedImage == true{
+            setImage(UIImage(named: imageName! + "_highlighted"), for: .selected)
+        }
+    }
+    
 }

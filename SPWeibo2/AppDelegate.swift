@@ -77,8 +77,8 @@ extension AppDelegate{
         UITabBar.appearance().tintColor = UIColor.orange
         
         // 设置全局navigationbar上的item的颜色
-        UINavigationBar.appearance().tintColor = UIColor.orange
-//        UINavigationBar.appearance().titleTextAttributes
+
+        
     }
     
     

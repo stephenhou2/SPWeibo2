@@ -22,11 +22,11 @@ class StatusPicturesCollectionView: UICollectionView {
             
             sizeToFit()
             
-            arrayDataSourceDelegate?.updateData(dataArray: picArray as [AnyObject]?, configureCellBlock: { (cell, item) in
-                let cell = cell as! StatusPictureCell
-                let picUrl = item as? String
-                cell.picURLStr = picUrl
-            })
+//            arrayDataSourceDelegate?.updateData(dataArray: picArray as [AnyObject]?, configureCellBlock: { (cell, item) in
+//                let cell = cell as! StatusPictureCell
+//                let picUrl = item as? String
+//                cell.picURLStr = picUrl
+//            })
             
             reloadData()
         }
@@ -63,9 +63,12 @@ class StatusPicturesCollectionView: UICollectionView {
     }
     
     private func setupCollectionView(){
-        arrayDataSourceDelegate = ArrayCollectionViewTool(collectionView: self,
-                                                              reuseIdentifier: statusPicReuseIdentifier,
-                                                              cellRegisterClass:StatusPictureCell.self)
+//        arrayDataSourceDelegate = ArrayCollectionViewTool(collectionView: self,
+//                                                              reuseIdentifier: statusPicReuseIdentifier,
+//                                                              cellRegisterClass:StatusPictureCell.self)
+        register(StatusPictureCell.self, forCellWithReuseIdentifier: statusPicReuseIdentifier)
+        dataSource = self
+        delegate = self
         
     }
     
@@ -110,6 +113,22 @@ class StatusPicturesCollectionView: UICollectionView {
         
     }
     
+}
+
+extension StatusPicturesCollectionView:UICollectionViewDataSource,UICollectionViewDelegate{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return picArray?.count ?? 0
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: statusPicReuseIdentifier, for: indexPath)
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as! StatusPictureCell
+        cell.picURLStr = self.picArray![indexPath.item]
+
+    }
     
     
 }

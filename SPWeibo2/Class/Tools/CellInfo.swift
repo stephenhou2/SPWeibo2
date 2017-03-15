@@ -6,4 +6,18 @@
 //  Copyright © 2017年 侯亮宏. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class CellInfo{
+    
+    var cellHeights:[CGFloat]
+    var cellReuseIds:[String]
+    
+
+
+    
+    init(cellHeights:[CGFloat],cellReuseIds:[String]) {
+        self.cellHeights = cellHeights
+        self.cellReuseIds = cellReuseIds
+    }
+}

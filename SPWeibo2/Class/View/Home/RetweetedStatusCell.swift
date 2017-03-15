@@ -19,7 +19,7 @@ class RetweetedStatusCell: StatusCell {
     
     // 转发文字
     private lazy var retweetedTextView:UILabel = {
-       let retweetedTextView = UILabel(text: "", fontSize: 12, textColor: UIColor.darkGray, margin: statusMargin)
+       let retweetedTextView = UILabel(text: "", fontSize: 15, textColor: UIColor.darkGray, margin: statusMargin)
         return retweetedTextView
     }()
     
@@ -55,7 +55,7 @@ class RetweetedStatusCell: StatusCell {
             make.top.equalTo(textView.snp.bottom).offset(statusMargin)
             make.left.equalTo(contentView.snp.left)
             make.right.equalTo(contentView.snp.right)
-            make.bottom.equalTo(bottomView.snp.top)
+            make.bottom.equalTo(bottomView.snp.bottom)
         }
         
         retweetedTextView.snp.makeConstraints { (make) in

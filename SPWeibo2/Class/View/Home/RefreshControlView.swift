@@ -104,42 +104,52 @@ extension ArrayTableViewTool{
     // 滚动过程中判断箭头动画是否执行
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
-        if #available(iOS 10.0, *) {
-            let refreshControlView = (scrollView as!UITableView).refreshControl as! RefreshControlView
-            
-            if contentOffsetY <= -124 && crossDownwards{
+        DispatchQueue.global().async {
+            if #available(iOS 10.0, *) {
+                let refreshControlView = (scrollView as!UITableView).refreshControl as! RefreshControlView
                 
-                refreshControlView.startArrowAnimation(crossDownwards:crossDownwards)
-                crossDownwards = !crossDownwards
+                if contentOffsetY <= -64 && self.crossDownwards{
+                    
+                    refreshControlView.startArrowAnimation(crossDownwards:self.crossDownwards)
+                    self.crossDownwards = !self.crossDownwards
+                }
+                else if contentOffsetY > -64 && !self.crossDownwards{
+                    refreshControlView.startArrowAnimation(crossDownwards:self.crossDownwards)
+                    self.crossDownwards = !self.crossDownwards
+                }
+                
+                
+                
+            } else {
+                // Fallback on earlier versions
             }
-            else if contentOffsetY > -124 && !crossDownwards{
-                refreshControlView.startArrowAnimation(crossDownwards:crossDownwards)
-                crossDownwards = !crossDownwards
-            }
-
-            
-            
-        } else {
-            // Fallback on earlier versions
         }
         
     }
 //    // 停止拖动时判断是否要开始刷新数据
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-        if #available(iOS 10.0, *) {
-            let refreshControlView = (scrollView as!UITableView).refreshControl as! RefreshControlView
-            if scrollView.contentOffset.y <= -124{
-                // 刷新网络数据
-                refreshControlView.beginRefreshing()
-                
-                
+        DispatchQueue.global().async { 
+            
+            if #available(iOS 10.0, *) {
+                let refreshControlView = (scrollView as!UITableView).refreshControl as! RefreshControlView
+                if scrollView.contentOffset.y <= -64{
+                    // 刷新网络数据
+                    DispatchQueue.main.async(execute: { 
+                         refreshControlView.beginRefreshing()
+                    })
+                   
+                    
+                    
+                }
+            } else {
+                // Fallback on earlier versions
             }
-        } else {
-            // Fallback on earlier versions
-        }
-        if scrollView.contentOffset.y <= -scrollView.contentSize.height + screenHeight{
-            scrollView.setContentOffset(CGPoint(x:0, y:-scrollView.contentSize.height + screenHeight), animated: true)
+            if scrollView.contentOffset.y <= -scrollView.contentSize.height + screenHeight{
+                DispatchQueue.main.async(execute: { 
+                    scrollView.setContentOffset(CGPoint(x:0, y:-scrollView.contentSize.height + screenHeight), animated: true)
+                })
+            }
         }
         
     }
@@ -147,7 +157,7 @@ extension ArrayTableViewTool{
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if #available(iOS 10.0, *) {
             let refreshControlView = (scrollView as!UITableView).refreshControl as! RefreshControlView
-            if scrollView.contentOffset.y >= -64{
+            if scrollView.contentOffset.y >= 0{
                 refreshControlView.loadingView.isHidden = true
                 
             }

@@ -40,13 +40,77 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SPWeibo2/Class/View/Home/RefreshControlView.swift"
-            timestampString = "511108379.922419"
+            filePath = "SPWeibo2/Class/Tools/ArrayCollectionViewTool.swift"
+            timestampString = "511150153.378907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "scrollViewDidEndDragging(_:willDecelerate:)"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "collectionView(_:willDisplay:forItemAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SPWeibo2.ArrayCollectionViewTool.collectionView (__ObjC.UICollectionView, willDisplay : __ObjC.UICollectionViewCell, forItemAt : Foundation.IndexPath) -&gt; ()"
+                  moduleName = "SPWeibo2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/houlianghong/Desktop/test/SPWeibo2/SPWeibo2/Class/Tools/ArrayCollectionViewTool.swift"
+                  timestampString = "511151848.022539"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "239">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SPWeibo2.ArrayCollectionViewTool.collectionView (__ObjC.UICollectionView, willDisplay : __ObjC.UICollectionViewCell, forItemAt : Foundation.IndexPath) -&gt; ()"
+                  moduleName = "SPWeibo2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/houlianghong/Desktop/test/SPWeibo2/SPWeibo2/Class/Tools/ArrayCollectionViewTool.swift"
+                  timestampString = "511151848.02374"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "348">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SPWeibo2/Class/View/Home/StatusPicturesCollectionView.swift"
+            timestampString = "511151847.4749"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "collectionView(_:willDisplay:forItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SPWeibo2/Class/Tools/ArrayTableViewTool.swift"
+            timestampString = "511151873.679445"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "tableView(_:willDisplay:forRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
